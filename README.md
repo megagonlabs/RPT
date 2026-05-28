@@ -3,7 +3,7 @@
 This repository contains the cleaned implementation for the paper
 [Reflective Prompt Tuning through Language Model Function-Calling](https://arxiv.org/abs/2605.21781).
 
-Reflective Prompt Tuning (RPT) automates prompt improvement by letting an optimizer model call diagnostic tools, inspect structured evaluation reports, and revise the target prompt across iterations.
+RPT automates prompt improvement by using an optimizer LLM with function-calling abilities to invoke diagnostic tools, analyze the target model’s failures, and produce structured evaluation reports. Each report, together with the history of earlier reports, is fed back to the optimizer, which iteratively refines the target prompt.
 
 ![RPT overview](figs/RPT_overview.png)
 
@@ -11,14 +11,13 @@ Reflective Prompt Tuning (RPT) automates prompt improvement by letting an optimi
 
 ## Reflective Prompt Tuning
 
-RPT is a function-calling workflow for iterative prompt optimization. Given a dataset split, a target model, and an initial prompt program, the system repeatedly:
+RPT is a function-calling workflow for iterative prompt optimization. Given a task, a target model, and an initial prompt program, the system repeatedly:
 
 1. evaluates the current prompt on an optimization split,
 2. diagnoses recurring failure modes,
 3. summarizes calibration and task metrics,
-4. clusters failures and prompt edits with ClusterFusion,
-5. asks an optimizer model to patch or stop,
-6. selects the final prompt using held-out validation performance.
+4. asks an optimizer model to propose a prompt patch or stop,
+5. selects the final prompt using held-out validation performance.
 
 The cleaned repository supports three tasks:
 

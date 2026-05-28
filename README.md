@@ -229,12 +229,12 @@ Common output locations:
 
 ## Citation
 
-If you use this repository, please cite:
+If you use this repository, please cite our work:
 
 ```bibtex
 @article{bayat2026reflectiveprompttuning,
   title = {Reflective Prompt Tuning through Language Model Function-Calling},
-  author = {Farima Fatahi Bayat and Moin Aminnaseri and Pouya Pezeshkpour and Estevam Hruschka},
+  author = {Fatahi Bayat, Farima and Aminnaseri, Moin and Pezeshkpour, Pouya and Hruschka, Estevam},
   year = {2026},
   url = {https://arxiv.org/abs/2605.21781}
 }

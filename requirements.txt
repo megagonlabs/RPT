@@ -1,0 +1,18 @@
+openai
+google-genai
+datasets
+pydantic
+tqdm
+numpy
+scikit-learn
+pandas
+matplotlib
+sympy
+lark
+tiktoken
+
+# Optional for the legacy BERTopic/HDBSCAN analysis fallback.
+bertopic
+sentence-transformers
+hdbscan
+

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+venv/
+
+logs/
+results/
+analysis_reports/
+clustering_results/
+vis_results/
+*.jsonl.tmp
+

@@ -30,29 +30,46 @@ The cleaned repository supports three tasks:
 ## Repository Structure
 
 ```text
-.
-├── rpt/
-│   ├── analysis/
-│   │   ├── cluster_failures_and_patches.py
-│   │   ├── cluster_fusion.py       # ClusterFusion topic extraction
-│   │   ├── interpret_data_using_heatmaps.py
-│   │   ├── paths.py                # Analysis path resolution
-│   │   └── performance_summarization_and_analysis.py
-│   ├── tasks/
-│   │   ├── hotpotqa.py             # OpenAI optimizer for HotpotQA
-│   │   ├── hotpotqa_gemini.py      # Gemini optimizer for HotpotQA
-│   │   ├── livebench_math.py       # OpenAI optimizer for LiveBench Math
-│   │   ├── livebench_math_gemini.py
-│   │   ├── xbrl_formula.py         # OpenAI optimizer for XBRL Formula
-│   │   └── xbrl_formula_gemini.py
-│   ├── common.py                 # JSONL logging, JSON helpers, shared file utilities
-│   ├── gemini_utils.py           # Gemini client, structured parsing, cleaned-log helpers
-│   └── paths.py                  # Repository and dataset path configuration
+RPT/
+├── .gitignore
+├── README.md
 ├── data/
-│   ├── hotpotqa/                 # Cached HotpotQA train/dev/test splits
-│   ├── livebench_math/           # Cached LiveBench Math train/val/test splits
-│   └── xbrl_formula/             # Cached XBRL Formula train/val/test splits
-└── run_analysis_pipeline.sh      # Analysis pipeline entrypoint
+│   ├── hotpotqa/
+│   │   ├── dev.jsonl
+│   │   ├── test.jsonl
+│   │   └── train.jsonl
+│   ├── livebench_math/
+│   │   ├── test.jsonl
+│   │   ├── train.jsonl
+│   │   └── val.jsonl
+│   └── xbrl_formula/
+│       ├── test.jsonl
+│       ├── train.jsonl
+│       └── val.jsonl
+├── figs/
+│   └── RPT_overview.png
+├── requirements.txt
+├── rpt/
+│   ├── __init__.py
+│   ├── analysis/
+│   │   ├── __init__.py
+│   │   ├── cluster_failures_and_patches.py
+│   │   ├── cluster_fusion.py
+│   │   ├── interpret_data_using_heatmaps.py
+│   │   ├── paths.py
+│   │   └── performance_summarization_and_analysis.py
+│   ├── common.py
+│   ├── gemini_utils.py
+│   ├── paths.py
+│   └── tasks/
+│       ├── __init__.py
+│       ├── hotpotqa.py
+│       ├── hotpotqa_gemini.py
+│       ├── livebench_math.py
+│       ├── livebench_math_gemini.py
+│       ├── xbrl_formula.py
+│       └── xbrl_formula_gemini.py
+└── run_analysis_pipeline.sh
 ```
 
 Generated artifacts are ignored by git: `logs/`, `clustering_results/`, `vis_results/`, `results/`, and `analysis_reports/`.
@@ -227,10 +244,4 @@ If you use this repository, please cite:
 
 ## Disclosure
 
-Embedded in or used by this repository are open source software components, datasets, model APIs, and other third-party materials. Each component remains governed by its own license, terms of use, and redistribution conditions. Those terms continue to apply to the corresponding portions of this repository and to any downstream use.
-
-You may receive, distribute, or modify open source code in this repository only under the terms of the applicable open source licenses. If any project terms conflict with a third-party open source or dataset license, the third-party license controls for that component or dataset.
-
-Do not redistribute dataset materials unless the relevant dataset license permits it. If a public release requires dataset pointers instead of bundled files, remove the cached JSONL files and provide links to the original sources in the dataset table above. Derived datasets should retain attribution and links to their upstream sources.
-
-All third-party components, datasets, and model-service integrations are provided without warranty, including implied warranties of merchantability or fitness for a particular purpose. Verify licenses, citations, and usage permissions before publishing, redistributing, or pushing this repository.
+Embedded in, or bundled with, this product are open source software (OSS) components, datasets and other third party components identified below. The license terms respectively governing the datasets and third-party components continue to govern those portions, and you agree to those license terms, which, when applicable, specifically limit any distribution. You may receive a copy of, distribute and/or modify any open source code for the OSS component under the terms of their respective licenses, which may be CC license and Apache 2.0 license. In the event of conflicts between Megagon Labs, Inc., license conditions and the Open Source Software license conditions, the Open Source Software conditions shall prevail with respect to the Open Source Software portions of the software. You agree not to, and are not permitted to, distribute actual datasets used with the OSS components listed below. You agree and are limited to distribute only links to datasets from known sources by listing them in the datasets overview table below. You are permitted to distribute derived datasets of data sets from known sources by including links to original dataset source in the datasets overview table below. You agree that any right to modify datasets originating from parties other than Megagon Labs, Inc. are governed by the respective third party's license conditions. All OSS components and datasets are distributed WITHOUT ANY WARRANTY, without even implied warranty such as for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, and without any liability to or claim against any Megagon Labs, Inc. entity other than as explicitly documented in this README document. You agree to cease using any part of the provided materials if you do not agree with the terms or the lack of any warranty herein. While Megagon Labs, Inc., makes commercially reasonable efforts to ensure that citations in this document are complete and accurate, errors may occur. If you see any error or omission, please help us improve this document by sending information to contact_oss@megagon.ai.

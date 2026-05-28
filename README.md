@@ -164,17 +164,17 @@ Please refer to the respective upstream sources for complete licensing terms and
 Run an OpenAI optimizer:
 
 ```bash
-python -m rpt.tasks.hotpotqa --iters 20
-python -m rpt.tasks.xbrl_formula --iters 20
-python -m rpt.tasks.livebench_math --iters 20
+python -m rpt.tasks.hotpotqa --iters 40
+python -m rpt.tasks.xbrl_formula --iters 40
+python -m rpt.tasks.livebench_math --iters 40
 ```
 
 Run a Gemini optimizer:
 
 ```bash
-python -m rpt.tasks.hotpotqa_gemini --iters 20 --optimizer_name gemini-3.1-pro
-python -m rpt.tasks.livebench_math_gemini --iters 20 --optimizer_name gemini-3.1-pro
-python -m rpt.tasks.xbrl_formula_gemini --iters 20 --optimizer_name gemini-3.1-pro
+python -m rpt.tasks.hotpotqa_gemini --iters 40 --optimizer_name gemini-3.1-pro
+python -m rpt.tasks.livebench_math_gemini --iters 40 --optimizer_name gemini-3.1-pro
+python -m rpt.tasks.xbrl_formula_gemini --iters 40 --optimizer_name gemini-3.1-pro
 ```
 
 Prepare or inspect cached LiveBench Math splits without running optimization:

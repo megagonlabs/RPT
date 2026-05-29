@@ -10,5 +10,6 @@ results/
 analysis_reports/
 clustering_results/
 vis_results/
+data/**/*.jsonl
+!data/**/.gitkeep
 *.jsonl.tmp
-

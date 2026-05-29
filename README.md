@@ -32,20 +32,15 @@ The cleaned repository supports three tasks:
 ```text
 RPT/
 ├── .gitignore
+├── LICENSE
 ├── README.md
 ├── data/
 │   ├── hotpotqa/
-│   │   ├── dev.jsonl
-│   │   ├── test.jsonl
-│   │   └── train.jsonl
+│   │   └── .gitkeep
 │   ├── livebench_math/
-│   │   ├── test.jsonl
-│   │   ├── train.jsonl
-│   │   └── val.jsonl
+│   │   └── .gitkeep
 │   └── xbrl_formula/
-│       ├── test.jsonl
-│       ├── train.jsonl
-│       └── val.jsonl
+│       └── .gitkeep
 ├── figs/
 │   └── RPT_overview.png
 ├── requirements.txt
@@ -59,6 +54,9 @@ RPT/
 │   │   ├── paths.py
 │   │   └── performance_summarization_and_analysis.py
 │   ├── common.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── prepare.py
 │   ├── gemini_utils.py
 │   ├── paths.py
 │   └── tasks/
@@ -72,7 +70,7 @@ RPT/
 └── run_analysis_pipeline.sh
 ```
 
-Generated artifacts are ignored by git: `logs/`, `clustering_results/`, `vis_results/`, `results/`, and `analysis_reports/`.
+Generated artifacts are ignored by git: `logs/`, `clustering_results/`, `vis_results/`, `results/`, `analysis_reports/`, and generated `data/**/*.jsonl` files.
 
 ---
 
@@ -117,13 +115,34 @@ export GOOGLE_CLOUD_LOCATION="global"
 
 ## Datasets
 
-The repository is organized around cached local JSONL splits. Dataset licenses and redistribution terms are governed by the upstream dataset providers.
+The repository does not redistribute dataset JSONL files. It keeps the expected data directories in place and provides a preparation command that downloads or regenerates the same local split paths.
 
 | Dataset | Local path | Split files | Upstream reference |
 | --- | --- | --- | --- |
 | HotpotQA | `data/hotpotqa/` | `train.jsonl`, `dev.jsonl`, `test.jsonl` | [HotpotQA](https://hotpotqa.github.io/) / [Hugging Face](https://huggingface.co/datasets/hotpotqa/hotpot_qa) |
 | LiveBench Math | `data/livebench_math/` | `train.jsonl`, `val.jsonl`, `test.jsonl` | [LiveBench](https://livebench.ai/) / [Hugging Face](https://huggingface.co/datasets/livebench/math) |
 | XBRL Formula | `data/xbrl_formula/` | `train.jsonl`, `val.jsonl`, `test.jsonl` | [ACE finance data](https://github.com/ace-agent/ace/tree/main/eval/finance/data) |
+
+Prepare all datasets:
+
+```bash
+python -m rpt.data.prepare
+```
+
+The first run requires network access to Hugging Face and GitHub.
+
+This writes:
+
+- `data/hotpotqa/train.jsonl`, `data/hotpotqa/dev.jsonl`, and `data/hotpotqa/test.jsonl`
+- `data/livebench_math/train.jsonl`, `data/livebench_math/val.jsonl`, and `data/livebench_math/test.jsonl`
+- `data/xbrl_formula/train.jsonl`, `data/xbrl_formula/val.jsonl`, and `data/xbrl_formula/test.jsonl`
+
+Prepare one dataset or overwrite existing files:
+
+```bash
+python -m rpt.data.prepare --dataset xbrl_formula
+python -m rpt.data.prepare --force
+```
 
 Dataset paths can be overridden with environment variables:
 
@@ -138,28 +157,31 @@ export RPT_XBRL_FORMULA_DATA_DIR="/path/to/xbrl_formula"
 
 ## Data Source Attribution
 
-The cached splits in this repository build on the following data sources:
+The generated local splits build on the following data sources:
 
 1. HotpotQA
    * Source: [HotpotQA](https://hotpotqa.github.io/) and the [hotpotqa/hotpot_qa](https://huggingface.co/datasets/hotpotqa/hotpot_qa) Hugging Face mirror.
    * License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-   * Local files: `data/hotpotqa/train.jsonl`, `data/hotpotqa/dev.jsonl`, and `data/hotpotqa/test.jsonl`.
 
 2. LiveBench Math
    * Source: [LiveBench](https://livebench.ai/) and the [livebench/math](https://huggingface.co/datasets/livebench/math) Hugging Face dataset.
    * License: [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-   * Local files: `data/livebench_math/train.jsonl`, `data/livebench_math/val.jsonl`, and `data/livebench_math/test.jsonl`.
 
 3. XBRL Formula
-   * Source: [ACE finance data](https://github.com/ace-agent/ace/tree/main/eval/finance/data)
+   * Source: [ACE finance data](https://github.com/ace-agent/ace/tree/main/eval/finance/data).
    * License: [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-   * Local files: `data/xbrl_formula/train.jsonl`, `data/xbrl_formula/val.jsonl`, `data/xbrl_formula/test.jsonl`.
 
 Please refer to the respective upstream sources for complete licensing terms and attribution requirements.
 
 ---
 
 ## Quick Start
+
+Prepare the local JSONL splits first:
+
+```bash
+python -m rpt.data.prepare
+```
 
 Run an OpenAI optimizer:
 

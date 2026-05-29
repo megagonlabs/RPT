@@ -190,7 +190,6 @@ class OpenAIConfig:
 class OpenAIWrapper:
     def __init__(self, cfg: OpenAIConfig):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.client = OpenAI()
         self.cfg = cfg
 
     def structured(self, *, system: str, user: str, schema: Dict[str, Any]) -> Dict[str, Any]:

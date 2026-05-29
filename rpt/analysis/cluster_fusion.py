@@ -42,10 +42,6 @@ from rpt.analysis.paths import resolve_analysis_dir
 
 
 # -------------------------
-# Config
-
-
-# -------------------------
 EMBED_MODEL = "text-embedding-3-large"
 LLM_MODEL = "gpt-4.1"
 
